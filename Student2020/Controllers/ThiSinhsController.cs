@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Student2020.Configs;
 using Student2020.Handler;
 using Student2020.Models;
+using IOFile = System.IO.File;
 
 namespace Student2020.Controllers
 {
@@ -32,14 +33,33 @@ namespace Student2020.Controllers
         }
 
         [HttpGet("{cmnd}")]
-        //[EnableCors("AllowOrigin")]
         public async Task<ActionResult<ThiSinh>> GetThiSinh(string cmnd)
         {
-            return await FindThiSinh(cmnd);
+            var thiSinh = await FindThiSinh(cmnd);
+
+            if (!string.IsNullOrEmpty(thiSinh.FileGcn))
+            {
+                thiSinh.FileGcn = Path.GetFileName(thiSinh.FileGcn);
+            }
+
+            return thiSinh;
+        }
+
+        [HttpGet]
+        [Route("download/{fileName}")]
+        public IActionResult GetFile(string fileName)
+        {
+            var path = Path.Combine(appConfig.DataPath, fileName);
+            if (IOFile.Exists(path))
+            {
+                var stream = IOFile.OpenRead(path);
+                return File(stream, "application/octet-stream", fileName);
+            }
+
+            return NotFound();
         }
 
         [HttpPut]
-        //[EnableCors("AllowOrigin")]
         public async Task UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
         {
             var existing = await FindThiSinh(inforNewSinhVien.CMND);
@@ -59,11 +79,11 @@ namespace Student2020.Controllers
 
                 foreach (var existingFile in Directory.EnumerateFiles(appConfig.DataPath, inforNewSinhVien.CMND + ".*"))
                 {
-                    System.IO.File.Delete(existingFile);
+                    IOFile.Delete(existingFile);
                 }
 
                 var fileName = Path.Combine(appConfig.DataPath, inforNewSinhVien.CMND + Path.GetExtension(inforNewSinhVien.ImageFileName));
-                await System.IO.File.WriteAllBytesAsync(fileName, fileContent);
+                await IOFile.WriteAllBytesAsync(fileName, fileContent);
                 existing.FileGcn = fileName;
             }
 
