@@ -1,35 +1,39 @@
-﻿
-<!DOCTYPE HTML>
-<html>
+﻿<!DOCTYPE HTML>
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html" />
-    <meta name="author" content="GallerySoft.info" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <title>Thong Bao Trung tuyen</title>
+    <meta name="author" content="Thông tin tuyển sinh" />
+
+    <script src="js/axios.min.js"></script>
+    <script src="js/vue.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+
+    <title>Thông báo trúng tuyển</title>
 </head>
 
 <body>
     <div id="app">
         <div v-if="error">
-            Khong tim thay thong tin
+            Không tìm thấy thông tin theo số CMND
         </div>
-        <div div v-else-if="!thisinh">
+        <div v-else-if="!thisinh">
             <div class="main_pagelogin">
 
                 <div class="header_lg">
-                    <img src="/img/logo-tuyensinh20201.png" />
-                    <img class="img_r" src="/img/logo-tuyensinh20202.png" />
+                    <img src="/img/logo-tuyensinh20201.png"  alt="Tuyển sinh"/>
+                    <img class="img_r" src="/img/logo-tuyensinh20202.png"  alt="Tuyển sinh"/>
                 </div>
                 <div class="content_lg">
                     <div class="main_login">
                         <div class="login_on">
-                            <img src="/img/find.png" />
+                            <img src="/img/find.png"  alt="Tìm kiếm"/>
                         </div>
                         <div class="form_lg">
-                            <label>Nhập Số CMND:</label>
-                            <input v-model="cmnd" type="text" value="">
+                            <label for="cmnd">Nhập Số CMND:</label>
+                            <input v-model="cmnd" type="text" value="" id="cmnd">
                             <button id="button_dangnhap" v-on:click="getInformation">Đăng nhập</button>
                         </div>
                     </div>
@@ -128,388 +132,6 @@
             <img src="/img/wtm.jpg" />
         </div>
     </div>
-
-
-
-    <script>
-        const uri = 'api/ThiSinhs/';
-        new Vue({
-            el: '#app',
-            data: {
-                thisinh: null,
-                cmnd: '',
-                diachi_nhanGB: '',
-                Image:'',
-                error: '',
-                errors: '',
-                img1Src:''
-            },
-            methods: {
-                getInformation: function (event) {
-                    axios.get(uri + this.cmnd)
-                        .then(response => {
-                        this.thisinh = response.data;
-                        })
-                        .catch(() => this.error = true);
-
-
-                },
-                saveInfor: async function (event) {
-                    await this.uploadImage();
-                    axios.put(uri, {
-                        CMND: this.cmnd,
-                        DiaChi: this.diachi_nhanGB,
-                        Image: this.Image
-                    }).then(response => { alert(response.data); })
-                        .catch(e => {
-                            this.errors.push(e)
-                        })
-                },
-                uploadImage: function () {
-                    const selectedImage = document
-                        .querySelector('input[type=file]')
-                        .files[0]; // get first file
-                    this.createBase64Image(selectedImage);
-                },
-                createBase64Image: function(fileObject) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.Image = e.target.result;
-                        alert("xxxxxxxxxxxxxx"+this.Image);
-                    };
-
-                    reader.readAsDataURL(fileObject);
-                }
-
-            }
-        });
-
-    </script>
-
+    <script type="text/javascript" src="js/app.js"></script>
 </body>
-<style>
-    .main_page {
-        width: 90%;
-        margin: 0 auto;
-        max-width: 800px;
-        color: #000;
-    }
-
-    .sec3 h3 {
-        font-size: 22px;
-        color: red;
-        margin-top: 50px;
-    }
-
-    body {
-        position: relative;
-        top: 0;
-        width: 100%;
-        float: left;
-        margin: 0;
-        padding-bottom: 200px;
-    }
-
-    .img_wtm img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        opacity: 0.1;
-        z-index: -1;
-        height: 100%;
-    }
-
-    body {
-        font-family: "Times New Roman", Times, serif;
-    }
-
-    .header {
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        margin-top: 230px;
-    }
-
-        .header h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            margin-top: 0;
-            text-transform: uppercase;
-        }
-
-    .header {
-        position: relative;
-    }
-
-        .header img {
-            width: 120px;
-            position: absolute;
-            top: -22px;
-            left: 0;
-            max-width: 15%;
-        }
-
-        .header h1 {
-            text-transform: uppercase;
-            font-family: "Times New Roman", Times, serif;
-            font-size: 40px;
-        }
-
-    .info p {
-        font-size: 20px;
-        font-weight: 600;
-        font-size: 22px;
-    }
-
-        .info p b {
-            width: 220px;
-            float: left;
-            font-weight: 100;
-            font-size: 20px;
-        }
-
-    .info {
-        margin-top: 60px;
-    }
-
-        .info h4 {
-            font-size: 22px;
-            font-style: italic;
-        }
-
-    .sec1 h3 {
-        font-size: 22px;
-        color: #0075ff;
-    }
-
-    .sec1_1 {
-        font-size: 20px;
-    }
-
-    .sec1_2 {
-        margin-top: 20px;
-        font-size: 20px;
-    }
-
-    input#diachi {
-        width: 500px;
-        height: 28px;
-        font-size: 20px;
-        font-family: "Times New Roman", Times, serif;
-    }
-
-    .sec1_2 b {
-        display: block;
-        font-size: 16px;
-        font-weight: 400;
-        margin-left: 300px;
-        margin-top: 11px;
-        background: green;
-        display: inline-block;
-        /* color: #fff; */
-        padding: 4px;
-    }
-
-    .sec1_3 {
-        margin-top: 40px;
-        text-align: center;
-    }
-
-        .sec1_3 button {
-            font-size: 22px;
-            padding: 10px 20px;
-            color: #fff;
-            background: #0075ff;
-            border: navajowhite;
-            cursor: pointer;
-        }
-
-            .sec1_3 button:hover {
-                background: blue;
-            }
-
-        .sec1_3 p {
-            padding: 5px;
-            background: yellow;
-        }
-
-    .sec2 h3 {
-        font-size: 22px;
-        color: #0075ff;
-        margin-top: 50px;
-    }
-
-    .sec2 h4 {
-        font-size: 20px;
-    }
-
-    .sec2 p {
-        font-size: 20px;
-    }
-
-        .sec2 p a {
-            color: blue;
-        }
-
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    .table_tinhtrang table {
-        width: 100%;
-    }
-
-        .table_tinhtrang table img {
-            width: 25px;
-            display: inline-block;
-        }
-
-    th.th1 {
-        width: 10%;
-    }
-
-    th.th2 {
-        width: 10%;
-    }
-
-    th.th3 {
-        width: 10%;
-    }
-
-    th.th5 {
-        width: 20%;
-    }
-
-    .table_tinhtrang {
-    }
-
-    .table_tinhtrang tr th {
-        font-size: 18px;
-        text-align: center;
-        padding: 10px 4px;
-    }
-
-    .table_tinhtrang tr td {
-        text-align: center;
-        padding: 4px 20px;
-    }
-    .main_pagelogin {
-        width: 90%;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-
-    .header_lg {
-        margin-top: 40px;
-        margin-bottom: 100px;
-    }
-
-    img.img_r {
-        float: right;
-    }
-
-    .main_login {
-        width: 800px;
-        margin: 0 auto;
-        height: 504px;
-        padding: 20px;
-        background: url(/img/login.jpg);
-        background-size: 100% auto;
-        box-sizing: border-box;
-    }
-
-    .content_lg {
-        width: 100%;
-        float: left;
-        min-height: calc(100vh - 600px);
-    }
-
-    .main_login > div {
-        width: 50%;
-        float: left;
-    }
-
-    .login_on {
-        text-align: center;
-    }
-
-        .login_on img {
-            margin-top: 100px;
-            width: 250px;
-        }
-
-    .form_lg {
-        margin-top: 150px;
-        text-align: center;
-    }
-
-        .form_lg label {
-            font-size: 30px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-    input#so_cmnd {
-        width: 300px;
-        margin: 20px 0;
-        border: none;
-        font-size: 30px;
-        padding: 10px;
-    }
-
-    .form_lg button {
-        font-size: 22px;
-        padding: 10px 20px;
-        color: #fff;
-        background: #0075ff;
-        border: navajowhite;
-        cursor: pointer;
-    }
-
-        .form_lg button:hover {
-            background: #0f5bb5;
-        }
-
-    .ft {
-        width: 100%;
-        float: left;
-        background: #096eba;
-        margin-top: 50px;
-    }
-
-    .fotter_login {
-        width: 90%;
-        max-width: 1000px;
-        margin: 0 auto;
-        color: #fff;
-    }
-
-    .col_ft {
-        width: 50%;
-        float: left;
-    }
-
-    .link_ts a {
-        display: block;
-        margin: 20px 0;
-        color: #fff;
-        font-weight: 700;
-    }
-
-    .link_ts {
-        margin-top: 40px;
-    }
-
-    .info_ts h4 {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-</style>
 </html>
-
-
-
-
-
-
-
