@@ -85,7 +85,8 @@ namespace Student2020.Models
                     .HasColumnName("XacNhanGCN")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.XacNhanTien).HasColumnType("datetime");
+                entity.Property(e => e.XacNhanTien)
+                    .HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);
