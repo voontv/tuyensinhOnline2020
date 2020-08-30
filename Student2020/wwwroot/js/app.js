@@ -28,7 +28,7 @@ new Vue({
             reader.onload = (x) => {
                 this.form.imageData = x.target.result;
             }
-
+            
             const file = e.target.files[0];
             this.form.imageFileName = file.name;
 
