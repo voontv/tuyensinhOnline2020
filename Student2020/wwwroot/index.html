@@ -86,7 +86,7 @@
                 <div class="sec1_2">
                     <label>Nộp Giấy chứng nhận tốt nghiệp:</label>
                     <input type="file" accept="image/*" capture="camera" id="cntn" value="cntn">
-                    <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b><br>
+                    <b v-if="!!thisinh.fileGcn">Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b><br>
                     <button style="align-content:center" v-on:click="saveInfor">Lưu xác nhận nhập học</button>
                 </div>
                 <div v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">
@@ -96,7 +96,7 @@
             </div>
             <div v-if="!!thisinh.fileGcn && !!thisinh.xacNhanGcn" class="sec2">
                 <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
-                <h4><p>Số tiền cần nộp (đồng): 00.000.000</h4>
+                <h4><p>Số tiền cần nộp (đồng): {{thisinh.soTien}}</h4>
                 <p>
                     Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="https://drive.google.com/file/d/1aYHOA6G6inefAK1ifUmOkuyy45rnFvfY/view" target="_blank">click vào đây</a> để xem hướng dẫn chi tiết thông tin gửi Bộ hồ sơ và nộp tiền.
                 </p>

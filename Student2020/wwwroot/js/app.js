@@ -39,7 +39,7 @@ new Vue({
             const reader = new FileReader();
             reader.onload = (e) => {
                 this.Image = e.target.result;
-                alert("xxxxxxxxxxxxxx"+this.Image);
+                //alert("xxxxxxxxxxxxxx"+this.Image);
             };
 
             reader.readAsDataURL(fileObject);
