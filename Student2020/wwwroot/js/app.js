@@ -11,16 +11,14 @@ new Vue({
         img1Src:''
     },
     methods: {
-        getInformation: function (event) {
+        getInformation: function () {
             axios.get(uri + this.cmnd)
                 .then(response => {
                     this.thisinh = response.data;
                 })
                 .catch(() => this.error = true);
-
-
         },
-        saveInfor: async function (event) {
+        saveInfor: async function () {
             await this.uploadImage();
             axios.put(uri, {
                 CMND: this.cmnd,

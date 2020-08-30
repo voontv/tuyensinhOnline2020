@@ -32,6 +32,12 @@ namespace Student2020
                opt.UseSqlServer(Configuration.GetSection("StrConnection").Value));
             services.AddControllers();
             services.AddMvc(ConfigOptions);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder.WithOrigins("http://localhost:5001"));
+            });
         }
 
         private void ConfigOptions(MvcOptions option)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Student2020.Handler;
@@ -26,12 +27,14 @@ namespace Student2020.Controllers
         }
 
         [HttpGet("{cmnd}")]
+        [EnableCors("AllowOrigin")]
         public async Task<ActionResult<ThiSinh>> GetThiSinh(string cmnd)
         {
             return await FindThiSinh(cmnd);
         }
 
         [HttpPut]
+        [EnableCors("AllowOrigin")]
         public async Task UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
         {
             var existing = await FindThiSinh(inforNewSinhVien.CMND);
