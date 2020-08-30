@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Student2020.Handler
 {
-    public class NotFoundException: Exception
+    public class BadRequestException: Exception
     {
-        public NotFoundException(string msg) : base(msg)
+        public BadRequestException(string msg) : base(msg)
         {
 
         }

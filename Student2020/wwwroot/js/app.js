@@ -1,49 +1,38 @@
-const uri = 'api/ThiSinhs/';
+const uri = 'http://27.71.235.200:801/api/ThiSinhs/';
 new Vue({
     el: '#app',
     data: {
         thisinh: null,
-        cmnd: '',
-        diachi_nhanGB: '',
-        Image:'',
-        error: '',
-        errors: '',
-        img1Src:''
+        form: {
+            cmnd: "0123369963"
+        },
+        error: ''
     },
     methods: {
         getInformation: function () {
-            axios.get(uri + this.cmnd)
+            axios.get(uri + this.form.cmnd)
                 .then(response => {
                     this.thisinh = response.data;
                 })
                 .catch(() => this.error = true);
         },
-        saveInfor: async function () {
-            await this.uploadImage();
-            axios.put(uri, {
-                CMND: this.cmnd,
-                DiaChi: this.diachi_nhanGB,
-                Image: this.Image
-            }).then(response => { alert(response.data); })
+        submit: function () {
+            axios.put(uri, this.form)
+                .then(response => { alert(response.data); })
                 .catch(e => {
                     this.errors.push(e)
                 })
         },
-        uploadImage: function () {
-            const selectedImage = document
-                .querySelector('input[type=file]')
-                .files[0]; // get first file
-            this.createBase64Image(selectedImage);
-        },
-        createBase64Image: function(fileObject) {
+        getImage: function (e) {
             const reader = new FileReader();
-            reader.onload = (e) => {
-                this.Image = e.target.result;
-                alert("xxxxxxxxxxxxxx"+this.Image);
-            };
+            reader.onload = (x) => {
+                this.form.imageData = x.target.result;
+            }
 
-            reader.readAsDataURL(fileObject);
+            const file = e.target.files[0];
+            this.form.imageFileName = file.name;
+
+            reader.readAsBinaryString(file);
         }
-
     }
 });

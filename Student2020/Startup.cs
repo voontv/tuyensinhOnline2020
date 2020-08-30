@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Student2020.Configs;
 using Student2020.Handler;
 using Student2020.Models;
 
@@ -25,7 +27,6 @@ namespace Student2020
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<NhapHoc2020Context>(opt =>
@@ -33,11 +34,20 @@ namespace Student2020
             services.AddControllers();
             services.AddMvc(ConfigOptions);
             services.AddCors();
+
+            var appConfig = new AppConfig();
+            Configuration.Bind(nameof(AppConfig), appConfig);
+            services.AddSingleton(appConfig);
+
+            if (!Directory.Exists(appConfig.DataPath))
+            {
+                Directory.CreateDirectory(appConfig.DataPath);
+            }
         }
 
-        private void ConfigOptions(MvcOptions option)
+        private static void ConfigOptions(MvcOptions option)
         {
-            option.Filters.Add(typeof(NotFoundExceptionHandler));
+            option.Filters.Add(typeof(BadRequestExceptionHandler));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +60,7 @@ namespace Student2020
 
             app.UseHttpsRedirection();
 
-            DefaultFilesOptions options = new DefaultFilesOptions();
+            var options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
             options.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(options);

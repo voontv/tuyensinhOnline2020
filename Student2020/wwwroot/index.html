@@ -8,6 +8,8 @@
     <script src="js/axios.min.js"></script>
     <script src="js/vue.js"></script>
 
+
+
     <link rel="stylesheet" href="css/style.css" />
 
     <title>Thông báo trúng tuyển</title>
@@ -32,7 +34,7 @@
                         </div>
                         <div class="form_lg">
                             <label for="cmnd">Nhập Số CMND:</label>
-                            <input v-model="cmnd" type="text" value="" id="cmnd">
+                            <input v-model="form.cmnd" type="text" value="" id="cmnd">
                             <button id="button_dangnhap" v-on:click="getInformation">Đăng nhập</button>
                         </div>
                     </div>
@@ -59,10 +61,10 @@
         </div>
         <div v-else-if="thisinh" id="main_page" class="main_page">
             <div class="header">
-                <img src="/img/logo_bk.png" />
+                <img src="/img/logo_bk.png"  alt="logo"/>
                 <h2>Đại học Đà Nẵng </h2>
                 <h2>Trường Đại học Bách khoa</h2>
-                <h1>thông báo</h1>
+                <h1>Thông báo</h1>
             </div>
             <div class="info">
                 <p><b>Thí sinh:</b>{{thisinh.hotenTs}}</p>
@@ -81,13 +83,13 @@
                 </div>
                 <div class="sec1_2">
                     <label>Địa chỉ nhận Giấy báo:</label>
-                    <input v-model="diachi_nhanGB" type="text" id="diachi" value="">
+                    <input v-model="form.DiaChi" type="text" id="diachi" value="">
                 </div>
                 <div class="sec1_2">
                     <label>Nộp Giấy chứng nhận tốt nghiệp:</label>
-                    <input type="file" accept="image/*" capture="camera" id="cntn" value="cntn">
+                    <input type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
                     <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b><br>
-                    <button style="align-content:center" v-on:click="saveInfor">Lưu xác nhận nhập học</button>
+                    <button style="align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
                 </div>
                 <div v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">
                     <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận Giấy chứng nhận/ Bằng tốt nghiệp.</p>
@@ -128,7 +130,7 @@
             </div>
         </div>
         <div v-if="thisinh" class="img_wtm">
-            <img src="/img/wtm.jpg" />
+            <img src="/img/wtm.jpg"  alt="ok"/>
         </div>
     </div>
     <script type="text/javascript" src="js/app.js"></script>

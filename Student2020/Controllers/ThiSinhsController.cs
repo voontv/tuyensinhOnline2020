@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Student2020.Configs;
 using Student2020.Handler;
 using Student2020.Models;
 
@@ -13,17 +16,19 @@ namespace Student2020.Controllers
     [ApiController]
     public class ThiSinhsController : ControllerBase
     {
-        private readonly NhapHoc2020Context _context;
+        private readonly NhapHoc2020Context context;
+        private readonly AppConfig appConfig;
 
-        public ThiSinhsController(NhapHoc2020Context context)
+        public ThiSinhsController(NhapHoc2020Context context, AppConfig appConfig)
         {
-            _context = context;
+            this.context = context;
+            this.appConfig = appConfig;
         }
 
         private async Task<ThiSinh> FindThiSinh(string cmnd)
         {
-            return await _context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == cmnd)
-                ?? throw new NotFoundException("Không tìm thấy thí sinh có cmnd " + cmnd);
+            return await context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == cmnd)
+                ?? throw new BadRequestException("Không tìm thấy thí sinh có cmnd " + cmnd);
         }
 
         [HttpGet("{cmnd}")]
@@ -39,11 +44,29 @@ namespace Student2020.Controllers
         {
             var existing = await FindThiSinh(inforNewSinhVien.CMND);
 
+            if (existing.XacNhanGcn is {})
+            {
+                throw new BadRequestException("Hệ thống đã xác nhận thông tin của bạn trước đó. Bạn không được phép nhập lại thông tin.");
+            }
+
             existing.DiaChi = inforNewSinhVien.DiaChi;
-            existing.FileGcn = inforNewSinhVien.Image;
             existing.NgayNopGcn = DateTime.Now;
 
-            await _context.SaveChangesAsync();
+            if (inforNewSinhVien.ImageData != null)
+            {
+                var fileName = inforNewSinhVien.CMND + "." + Path.GetExtension(inforNewSinhVien.ImageFileName);
+                var fileContent = Convert.FromBase64String(inforNewSinhVien.ImageData);
+
+                foreach (var existingFile in Directory.EnumerateFiles(appConfig.DataPath, inforNewSinhVien.CMND + ".*"))
+                {
+                    Directory.Delete(existingFile);
+                }
+
+                await System.IO.File.WriteAllBytesAsync(fileName, fileContent);
+                existing.FileGcn = fileName;
+            }
+
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -8,9 +8,10 @@ namespace Student2020.Models
     public class InforNewSinhVien
     {
         public string CMND { get; set; }
-
         public string DiaChi { get; set; }
 
-        public string Image { get; set; }
+        public string ImageData { get; set; }
+
+        public string ImageFileName { get; set; }
     }
 }
