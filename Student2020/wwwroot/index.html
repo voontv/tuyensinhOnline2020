@@ -69,7 +69,7 @@
             <div class="info">
                 <p><b>Thí sinh:</b>{{thisinh.hotenTs}}</p>
                 <p><b>So CMND:</b>{{thisinh.cmnd}}</p>
-                <p v-if="thisinh.ngaysinh"><b>Sinh ngày:</b>{{thisinh.ngaysinh}}</p> <!--Khong co ngay sinh--><br />
+                <p><b>Sinh ngày:</b>{{thisinh.ngaySinh}}</p>
                 <p><b>Trúng tuyển ngành:</b>{{thisinh.tenNganh}}</p>
                 <p><b>Mã ngành:</b>{{thisinh.maNganh}}</p>
                 <h4>Nhà trường mời Anh/Chị làm thủ tục nhập học, gồm 3 bước thực hiện như sau:</h4>
@@ -102,7 +102,7 @@
                         <input type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
                         <button style="align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
                     </div>
-                    <div class="sec1_3">
+                    <div v-if="thisinh.fileGcn" class="sec1_3">
                         <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận Giấy chứng nhận/ Bằng tốt nghiệp.</p>
                     </div>
                     <div v-if="thisinh.note1" class="info-panel">
