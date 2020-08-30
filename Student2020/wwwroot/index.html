@@ -80,10 +80,13 @@
                             <th class="th5">Ghi chú</th>
                         </tr>
                         <tr>
-                            <td><img src="/img/yes.png" /></td>
-                            <td><img src="/img/no.png" /></td>
-                            <td><img src="/img/no.png" /></td>
-                            <td></td>
+                            <td v-if="!!thisinh.diaChi"><img src="/img/yes.png" /></td>
+                            <td v-else><img src="/img/no.png" /></td>
+                            <td v-if="!!thisinh.xacNhanTien"><img src="/img/yes.png" /></td>
+                            <td v-else><img src="/img/no.png" /></td>
+                            <td v-if="!!thisinh.xacNhanBoHs"><img src="/img/yes.png" /></td>
+                            <td v-else><img src="/img/no.png" /></td>
+                            <td>{{thisinh.diaChi}}</td>
                             <td></td>
                         </tr>
                     </table>
@@ -107,13 +110,15 @@
                 diachi_nhanGB: '',
                 Image:'',
                 error: '',
-                errors:''
+                errors: '',
+                img1Src:''
             },
             methods: {
                 getInformation: function (event) {
                     axios.get("api/ThiSinhs/" + this.cmnd)
-                        .then(response => this.thisinh = response.data)
+                        .then(response =>this.thisinh = response.data)
                         .catch(() => this.error = true);
+
 
                 },
                 saveInfor: function (event) {
@@ -121,14 +126,27 @@
                         CMND: this.cmnd,
                         DiaChi: this.diachi_nhanGB,
                         Image: ""
-                    }).then(response => { })
+                    }).then(response => { alert(response.data); })
                         .catch(e => {
                             this.errors.push(e)
                         })
                 }
-            }
-
+                //,
+               // settingVissibleElement: function (thisinh) {
+//
+                  //  if (thisinh.diachi_nhanGB != null) {
+                //        this.img1Src = "/img/no.png";
+                    //}
+                //}
+                
+            }                      
         });
+
+        //function settingVissibleElement(thisinh) {
+        //    if (thisinh.diachi_nhanGB != null) {
+         //       img1Src = 
+         //   }
+        //}
     </script>
 
 </body>

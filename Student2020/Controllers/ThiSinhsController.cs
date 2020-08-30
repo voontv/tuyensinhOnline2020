@@ -78,7 +78,7 @@ namespace Student2020.Controllers
 
         [HttpPut]
         [Route("sendInformation")]
-        public async Task<IActionResult> UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
+        public async Task<string> UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
         {
 
             if (await _context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == inforNewSinhVien.CMND) is { } existing)
@@ -87,9 +87,13 @@ namespace Student2020.Controllers
                 existing.PathImage = inforNewSinhVien.Image;
                 existing.NgayNopGcn = DateTime.UtcNow;               
                 await _context.SaveChangesAsync();
-            }        
-
-            return NoContent();
+                return "Upload thanh cong";
+            }
+            else
+            {
+                return "That bai vui long thu lai";
+            }
+            
         }
 
         // POST: api/ThiSinhs
