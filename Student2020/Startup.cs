@@ -49,6 +49,11 @@ namespace Student2020
 
             app.UseHttpsRedirection();
 
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear();
+            options.DefaultFileNames.Add("index.html");
+            app.UseDefaultFiles(options);
+
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthorization();
