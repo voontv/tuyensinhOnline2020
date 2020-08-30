@@ -21,7 +21,6 @@ namespace Student2020.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=WIN-CE230LNQVTR\\SQLEXPRESS;Database=NhapHoc2020;Trusted_Connection=True;user id=sms;password=StYNuRyvPK99G6D6;");
             }
         }
