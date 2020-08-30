@@ -52,10 +52,10 @@
                 <div class="sec1_2">
                     <label>Nộp Giấy chứng nhận tốt nghiệp:</label>
                     <input type="file" accept="image/*" capture="camera" id="cntn" value="cntn">
-                    <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b>
+                    <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b><br>
+                    <button style="align-content:center" v-on:click="saveInfor">Lưu xác nhận nhập học</button>
                 </div>
-                <div  v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">
-                    <button v-on:click="saveInfor">Lưu xác nhận nhập học</button>
+                <div  v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">                    
                     <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận Giấy chứng nhận/ Bằng tốt nghiệp.</p>
                 </div>
 
@@ -111,24 +111,25 @@
                 Image:'',
                 error: '',
                 errors: '',
-                img1Src:''
+                img1Src:'',
+                Image:''
             },
             methods: {
                 getInformation: function (event) {
                     axios.get("api/ThiSinhs/" + this.cmnd)
                         .then(response => {
-                        this.thisinh = response.data;
-                            //this.uploadImage();
+                        this.thisinh = response.data;                          
                         })
                         .catch(() => this.error = true);
 
 
                 },
                 saveInfor: function (event) {
+                    this.uploadImage();
                     axios.put(uri + "/sendInformation", {
                         CMND: this.cmnd,
                         DiaChi: this.diachi_nhanGB,
-                        Image: ""
+                        Image: this.Image
                     }).then(response => { alert(response.data); })
                         .catch(e => {
                             this.errors.push(e)
@@ -138,26 +139,20 @@
                     const selectedImage = document
                         .querySelector('input[type=file]')
                         .files[0]; // get first file
-                    this.createBase64Image(selectedImage);
-                    alert("xxxxxxxxxxxxxxxxxxxxxxx ");
+                    this.createBase64Image(selectedImage);                 
                 },
                 createBase64Image: function(fileObject) {
                     const reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.image = e.target.result;
-                        this.uploadImage();
+                    reader.onload = (e) => {                       
+                        this.Image = e.target.result;
                     };
+
                     reader.readAsDataURL(fileObject);
                 }
                 
             }                      
         });
-
-        //function settingVissibleElement(thisinh) {
-        //    if (thisinh.diachi_nhanGB != null) {
-         //       img1Src = 
-         //   }
-        //}
+      
     </script>
 
 </body>

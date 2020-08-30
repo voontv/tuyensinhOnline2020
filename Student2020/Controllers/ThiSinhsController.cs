@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -83,6 +85,7 @@ namespace Student2020.Controllers
 
             if (await _context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == inforNewSinhVien.CMND) is { } existing)
             {
+                var stringImage = inforNewSinhVien.Image;
                 existing.DiaChi = inforNewSinhVien.DiaChi;
                 existing.PathImage = inforNewSinhVien.Image;
                 existing.NgayNopGcn = DateTime.UtcNow;               
@@ -143,5 +146,27 @@ namespace Student2020.Controllers
         {
             return _context.ThiSinh.Any(e => e.Cmnd == id);
         }
+
+       /* public bool SaveImage(string ImgStr, string ImgName)
+        {
+            String path = System.Web.HttpContext.Current.Server.MapPath("~/ImageStorage"); //Path
+
+            //Check if directory exist
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path); //Create directory if it doesn't exist
+            }
+
+            string imageName = ImgName + ".jpg";
+
+            //set the image path
+            string imgPath = Path.Combine(path, imageName);
+
+            byte[] imageBytes = Convert.FromBase64String(ImgStr);
+
+            File.WriteAllBytes(imgPath, imageBytes);
+
+            return true;
+        }*/
     }
 }
