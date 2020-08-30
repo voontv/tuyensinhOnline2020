@@ -1,10 +1,10 @@
-const uri = 'http://27.71.235.200:801/api/ThiSinhs/';
+const uri = 'api/ThiSinhs/';
 new Vue({
     el: '#app',
     data: {
         thisinh: null,
         form: {
-            cmnd: "0123369963"
+            cmnd: ""
         },
         error: ''
     },

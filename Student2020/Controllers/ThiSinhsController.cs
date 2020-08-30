@@ -54,15 +54,15 @@ namespace Student2020.Controllers
 
             if (inforNewSinhVien.ImageData != null)
             {
-
-                var fileContent = Convert.FromBase64String(inforNewSinhVien.ImageData);
+                var base64Mark = "base64,";
+                var fileContent = Convert.FromBase64String(inforNewSinhVien.ImageData.Substring(inforNewSinhVien.ImageData.IndexOf(base64Mark) + base64Mark.Length));
 
                 foreach (var existingFile in Directory.EnumerateFiles(appConfig.DataPath, inforNewSinhVien.CMND + ".*"))
                 {
                     Directory.Delete(existingFile);
                 }
 
-                var fileName = Path.Combine(appConfig.DataPath, inforNewSinhVien.CMND + "." + Path.GetExtension(inforNewSinhVien.ImageFileName));
+                var fileName = Path.Combine(appConfig.DataPath, inforNewSinhVien.CMND + Path.GetExtension(inforNewSinhVien.ImageFileName));
                 await System.IO.File.WriteAllBytesAsync(fileName, fileContent);
                 existing.FileGcn = fileName;
             }
