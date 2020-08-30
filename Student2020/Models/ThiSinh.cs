@@ -21,8 +21,6 @@ namespace Student2020.Models
         public string UsXacNhanGcn { get; set; }
         public string UsXacNhanBoHs { get; set; }
         public string UsXacNhanTien { get; set; }
-        public string PathImage { get; set; }
-
         public int? SoTien { set; get; }
     }
 }

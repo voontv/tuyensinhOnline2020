@@ -27,20 +27,20 @@ namespace Student2020.Controllers
         }
 
         [HttpGet("{cmnd}")]
-        [EnableCors("AllowOrigin")]
+        //[EnableCors("AllowOrigin")]
         public async Task<ActionResult<ThiSinh>> GetThiSinh(string cmnd)
         {
             return await FindThiSinh(cmnd);
         }
 
         [HttpPut]
-        [EnableCors("AllowOrigin")]
+        //[EnableCors("AllowOrigin")]
         public async Task UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
         {
             var existing = await FindThiSinh(inforNewSinhVien.CMND);
 
             existing.DiaChi = inforNewSinhVien.DiaChi;
-            existing.PathImage = inforNewSinhVien.Image;
+            existing.FileGcn = inforNewSinhVien.Image;
             existing.NgayNopGcn = DateTime.Now;
 
             await _context.SaveChangesAsync();

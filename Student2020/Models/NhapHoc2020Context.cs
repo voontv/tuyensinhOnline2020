@@ -58,11 +58,7 @@ namespace Student2020.Models
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.Note1).HasMaxLength(250);
-
-                entity.Property(e => e.PathImage)
-                    .HasColumnName("path_image")
-                    .HasMaxLength(50);
-
+          
                 entity.Property(e => e.TenNganh).HasMaxLength(250);
 
                 entity.Property(e => e.UsXacNhanBoHs)
