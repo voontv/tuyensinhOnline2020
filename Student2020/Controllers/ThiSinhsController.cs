@@ -54,7 +54,7 @@ namespace Student2020.Controllers
 
             if (inforNewSinhVien.ImageData != null)
             {
-                var fileName = inforNewSinhVien.CMND + "." + Path.GetExtension(inforNewSinhVien.ImageFileName);
+
                 var fileContent = Convert.FromBase64String(inforNewSinhVien.ImageData);
 
                 foreach (var existingFile in Directory.EnumerateFiles(appConfig.DataPath, inforNewSinhVien.CMND + ".*"))
@@ -62,6 +62,7 @@ namespace Student2020.Controllers
                     Directory.Delete(existingFile);
                 }
 
+                var fileName = Path.Combine(appConfig.DataPath, inforNewSinhVien.CMND + "." + Path.GetExtension(inforNewSinhVien.ImageFileName));
                 await System.IO.File.WriteAllBytesAsync(fileName, fileContent);
                 existing.FileGcn = fileName;
             }
