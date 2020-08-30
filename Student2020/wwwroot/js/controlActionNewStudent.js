@@ -19,7 +19,6 @@ async function makeRequest() {
 
 function encodeImgtoBase64() {
 
-    //var img = document.getElementById("img").files;
     var img = document.getElementById('img').files[0];;
     var imgBase64 = "";
     var reader = new FileReader();

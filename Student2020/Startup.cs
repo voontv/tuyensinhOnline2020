@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Student2020.Handler;
 using Student2020.Models;
 
 namespace Student2020
@@ -30,6 +31,12 @@ namespace Student2020
             services.AddDbContext<NhapHoc2020Context>(opt =>
                opt.UseSqlServer(Configuration.GetSection("StrConnection").Value));
             services.AddControllers();
+            services.AddMvc(ConfigOptions);
+        }
+
+        private void ConfigOptions(MvcOptions option)
+        {
+            option.Filters.Add(typeof(NotFoundExceptionHandler));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -64,7 +64,7 @@
                 <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
                 <h4><p>Số tiền cần nộp (đồng): 00.000.000</h4>
                 <p>
-                    Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="#" target="_blank">click vào đây</a> để xem hướng dẫn chi tiết thông tin gửi Bộ hồ sơ và nộp tiền.
+                    Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="https://drive.google.com/file/d/1aYHOA6G6inefAK1ifUmOkuyy45rnFvfY/view" target="_blank">click vào đây</a> để xem hướng dẫn chi tiết thông tin gửi Bộ hồ sơ và nộp tiền.
                 </p>
                 <p class="as">Trân trọng cảm ơn Anh/Chị.</p>
             </div>
@@ -111,8 +111,7 @@
                 Image:'',
                 error: '',
                 errors: '',
-                img1Src:'',
-                Image:''
+                img1Src:''
             },
             methods: {
                 getInformation: function (event) {
@@ -124,8 +123,8 @@
 
 
                 },
-                saveInfor: function (event) {
-                    this.uploadImage();
+                saveInfor: async function (event) {
+                    await this.uploadImage();
                     axios.put(uri + "/sendInformation", {
                         CMND: this.cmnd,
                         DiaChi: this.diachi_nhanGB,
@@ -145,6 +144,7 @@
                     const reader = new FileReader();
                     reader.onload = (e) => {                       
                         this.Image = e.target.result;
+                        alert("xxxxxxxxxxxxxx"+this.Image);
                     };
 
                     reader.readAsDataURL(fileObject);
