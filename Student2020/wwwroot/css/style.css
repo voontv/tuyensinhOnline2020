@@ -120,7 +120,13 @@ input#diachi {
     padding: 4px;
 }
 
-.info{
+.uploaded{
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.info-panel{
+    margin-top: 10px;
     text-align: center;
     width: 100%;
     color: #155724;

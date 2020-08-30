@@ -13,15 +13,22 @@ new Vue({
             axios.get(uri + this.form.cmnd)
                 .then(response => {
                     this.thisinh = response.data;
+                    this.form.DiaChi = this.thisinh.diaChi;
                 })
                 .catch(() => this.error = true);
         },
         submit: function () {
             axios.put(uri, this.form)
-                .then(response => { alert(response.data); })
-                .catch(e => {
-                    this.errors.push(e)
+                .then(() => {
+                    this.getInformation();
                 })
+                .catch(e => {
+                    console.log(e);
+                    this.errors.push(e);
+                })
+        },
+        getDownloadUrl(file){
+          return uri + "download/"+ file;
         },
         getImage: function (e) {
             const reader = new FileReader();
