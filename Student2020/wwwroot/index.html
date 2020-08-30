@@ -15,13 +15,44 @@
         <div v-if="error">
             Khong tim thay thong tin
         </div>
+        <div div v-else-if="!thisinh">
+            <div class="main_pagelogin">
 
-        <div v-else-if="!thisinh" id="div_button_dangnhap" class="form-group col-md-6">
-            <label class="control-label col-md-5" for="Title" style="padding-left: 0px;">Nhập Số CMND:</label>
+                <div class="header_lg">
+                    <img src="/img/logo-tuyensinh20201.png" />
+                    <img class="img_r" src="/img/logo-tuyensinh20202.png" />
+                </div>
+                <div class="content_lg">
+                    <div class="main_login">
+                        <div class="login_on">
+                            <img src="/img/find.png" />
+                        </div>
+                        <div class="form_lg">
+                            <label>Nhập Số CMND:</label>
+                            <input v-model="cmnd" type="text" value="">
+                            <button id="button_dangnhap" v-on:click="getInformation">Đăng nhập</button>
+                        </div>
+                    </div>
+                </div>
 
-            <p><b>Thí sinh:</b></p>
-            <input v-model="cmnd" type="text" class="form-control" style="width: 200px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAANJJREFUOBHdUzsOgzAMfaDOiIETcBjUDozcjetwh3CBdsnAgLiAa1uyG+gAtJ1qyYljv+dPAgBwY72z0kEV7JXV5QzZighHJeNVnJ+IcJGfYVZVhbZt3yjW1u7edR2FEAynibyDsiw9c1EUyHMPIY1lmXbuWEX1fY9pmtA0Deq6RowRwzAoKI05KzFeZRLnWVNn4jZtNuIRiEfws8XkDsZxNL/WuVi1eZ7NxLIsbothMSKC6FYs4+7Oz0j8jIbTPD/5kB7blg6cV5yvf6YDBf8a8gSLtXzq+l6rIQAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-            <button id="button_dangnhap" v-on:click="getInformation">Dang nhap</button>
+            </div>
+            <div class="ft">
+                <div class="fotter_login">
+                    <div class="col_ft">
+                        <div class="link_ts">
+                            <a href="http://dut.udn.vn/TuyenSinh2020" target="_blank">THÔNG TIN TUYỂN SINH</a>
+                            <a href="http://dut.udn.vn:8082/public/Help.aspx" target="_blank">HƯỚNG DẪN NHẬP HỌC</a>
+                        </div>
+                    </div>
+                    <div class="col_ft">
+                        <div class="info_ts">
+                            <h4>Trường Đại học Bách khoa, Đại học Đà Nẵng</h4>
+                            <p>Địa chỉ: 54 Nguyễn Lương Bằng, Đà Nẵng</p>
+                            <p>Điện thoại: 02363.733.591, Email: tuyensinh2020@dut.udn.vn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div v-else-if="thisinh" id="main_page" class="main_page">
             <div class="header">
@@ -93,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="img_wtm">
+        <div v-if="thisinh" class="img_wtm">
             <img src="/img/wtm.jpg" />
         </div>
     </div>
@@ -353,16 +384,126 @@
     .table_tinhtrang {
     }
 
-        .table_tinhtrang tr th {
-            font-size: 18px;
-            text-align: center;
-            padding: 10px 4px;
+    .table_tinhtrang tr th {
+        font-size: 18px;
+        text-align: center;
+        padding: 10px 4px;
+    }
+
+    .table_tinhtrang tr td {
+        text-align: center;
+        padding: 4px 20px;
+    }
+    .main_pagelogin {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .header_lg {
+        margin-top: 40px;
+        margin-bottom: 100px;
+    }
+
+    img.img_r {
+        float: right;
+    }
+
+    .main_login {
+        width: 800px;
+        margin: 0 auto;
+        height: 504px;
+        padding: 20px;
+        background: url(/img/login.jpg);
+        background-size: 100% auto;
+        box-sizing: border-box;
+    }
+
+    .content_lg {
+        width: 100%;
+        float: left;
+        min-height: calc(100vh - 600px);
+    }
+
+    .main_login > div {
+        width: 50%;
+        float: left;
+    }
+
+    .login_on {
+        text-align: center;
+    }
+
+        .login_on img {
+            margin-top: 100px;
+            width: 250px;
         }
 
-        .table_tinhtrang tr td {
-            text-align: center;
-            padding: 4px 20px;
+    .form_lg {
+        margin-top: 150px;
+        text-align: center;
+    }
+
+        .form_lg label {
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
         }
+
+    input#so_cmnd {
+        width: 300px;
+        margin: 20px 0;
+        border: none;
+        font-size: 30px;
+        padding: 10px;
+    }
+
+    .form_lg button {
+        font-size: 22px;
+        padding: 10px 20px;
+        color: #fff;
+        background: #0075ff;
+        border: navajowhite;
+        cursor: pointer;
+    }
+
+        .form_lg button:hover {
+            background: #0f5bb5;
+        }
+
+    .ft {
+        width: 100%;
+        float: left;
+        background: #096eba;
+        margin-top: 50px;
+    }
+
+    .fotter_login {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+        color: #fff;
+    }
+
+    .col_ft {
+        width: 50%;
+        float: left;
+    }
+
+    .link_ts a {
+        display: block;
+        margin: 20px 0;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .link_ts {
+        margin-top: 40px;
+    }
+
+    .info_ts h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
 </style>
 </html>
 
