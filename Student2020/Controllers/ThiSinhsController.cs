@@ -34,7 +34,7 @@ namespace Student2020.Controllers
         [HttpGet("{cmnd}")]
         public async Task<ActionResult<ThiSinh>> GetThiSinh(string cmnd)
         {
-            var thiSinh = await _context.ThiSinh.FindAsync(cmnd);
+            var thiSinh = await _context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == cmnd);
 
             if (thiSinh == null)
             {
@@ -80,34 +80,14 @@ namespace Student2020.Controllers
         [Route("sendInformation")]
         public async Task<IActionResult> UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
         {
-            var thiSinh = await _context.ThiSinh.FindAsync(inforNewSinhVien.CMND);
 
-            if (thiSinh == null)
+            if (await _context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == inforNewSinhVien.CMND) is { } existing)
             {
-                return NotFound();
-            }
-
-        
-            thiSinh.DiaChi = inforNewSinhVien.DiaChi;
-           thiSinh.NgayNopGcn = DateTime.UtcNow;
-
-            _context.Entry(thiSinh).State = EntityState.Modified;
-
-            try
-            {
+                existing.DiaChi = inforNewSinhVien.DiaChi;
+                existing.PathImage = inforNewSinhVien.Image;
+                existing.NgayNopGcn = DateTime.UtcNow;               
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ThiSinhExists(inforNewSinhVien.CMND))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            }        
 
             return NoContent();
         }
