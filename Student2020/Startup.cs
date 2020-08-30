@@ -57,6 +57,11 @@ namespace Student2020
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+               // app.UseDeveloperExceptionPage();
+            }
+            
 
             app.UseHttpsRedirection();
 
@@ -64,7 +69,6 @@ namespace Student2020
             options.DefaultFileNames.Clear();
             options.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(options);
-
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthorization();

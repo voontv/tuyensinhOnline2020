@@ -59,7 +59,7 @@ namespace Student2020.Controllers
 
                 foreach (var existingFile in Directory.EnumerateFiles(appConfig.DataPath, inforNewSinhVien.CMND + ".*"))
                 {
-                    Directory.Delete(existingFile);
+                    System.IO.File.Delete(existingFile);
                 }
 
                 var fileName = Path.Combine(appConfig.DataPath, inforNewSinhVien.CMND + Path.GetExtension(inforNewSinhVien.ImageFileName));
