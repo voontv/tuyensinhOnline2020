@@ -120,6 +120,19 @@ input#diachi {
     padding: 4px;
 }
 
+.info{
+    text-align: center;
+    width: 100%;
+    color: #155724;
+    background-color: #d4edda;
+    font-size: 24px;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
 .sec1_3 {
     margin-top: 40px;
     text-align: center;
