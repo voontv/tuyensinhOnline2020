@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +32,6 @@ namespace Student2020.Controllers
         }
 
         [HttpPut]
-        [Route("sendInformation")]
         public async Task UpdateThutuc([FromBody] InforNewSinhVien inforNewSinhVien)
         {
             var existing = await FindThiSinh(inforNewSinhVien.CMND);
