@@ -76,58 +76,65 @@
             </div>
             <div class="sec1">
                 <h3>Bước 1: Nộp Giấy chứng nhận tốt nghiệp THPT</h3>
-                <p>Anh/Chị cần thực hiện: a/ Tick vào lời cam đoan; b/ Nhập địa chỉ để nhận Giấy báo trúng tuyển; c/ Kích vào nút [Choose File] và làm theo yêu cầu trên điện thoại hoặc máy tính để chọn ảnh Giấy chứng nhận tốt nghiệp THPT (hoặc Bằng tốt nghiệp THPT).  Sau đó, kích nút [Lưu xác nhận nhập học].</p>
-                <div class="sec1_1">
-                    <input type="checkbox" id="camdoan" name="camdoan" checked>
-                    <label for="camdoan"> Tôi cam đoan tôi đã tốt nghiệp THPT; nếu gian dối, tôi xin chịu hoàn toàn trách nhiệm.</label>
-                </div>
-                <div class="sec1_2">
-                    <label>Địa chỉ nhận Giấy báo:</label>
-                    <input v-model="form.DiaChi" type="text" id="diachi" value="">
-                </div>
-                <div class="sec1_2">
-                    <label>Nộp Giấy chứng nhận tốt nghiệp:</label>
-                    <input type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
-                    <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b><br>
-                    <button style="align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
-                </div>
-                <div v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">
-                    <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận Giấy chứng nhận/ Bằng tốt nghiệp.</p>
-                </div>
 
-            </div>
-            <div v-if="!!thisinh.fileGcn && !!thisinh.xacNhanGcn" class="sec2">
-                <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
-                <h4><p>Số tiền cần nộp (đồng): {{thisinh.soTien}}</h4>
-                <p>
-                    Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="https://drive.google.com/file/d/1aYHOA6G6inefAK1ifUmOkuyy45rnFvfY/view" target="_blank">click vào đây</a> để xem hướng dẫn chi tiết thông tin gửi Bộ hồ sơ và nộp tiền.
-                </p>
-                <p class="as">Trân trọng cảm ơn Anh/Chị.</p>
-            </div>
-            <div v-if="!!thisinh.fileGcn && !!thisinh.xacNhanGcn" class="sec3">
-                <h3>TRẠNG THÁI TRƯỜNG NHẬN HỒ SƠ VÀ TIỀN:</h3>
-                <div class="table_tinhtrang">
-                    <table>
-                        <tr>
-                            <th class="th1">GCN/BTN</th>
-                            <th class="th2">Bộ hồ sơ</th>
-                            <th class="th3">Tiền</th>
-                            <th class="th4">Địa chỉ nhận giấy báo</th>
-                            <th class="th5">Ghi chú</th>
-                        </tr>
-                        <tr>
-                            <td v-if="!!thisinh.diaChi"><img src="/img/yes.png" /></td>
-                            <td v-else><img src="/img/no.png" /></td>
-                            <td v-if="!!thisinh.xacNhanTien"><img src="/img/yes.png" /></td>
-                            <td v-else><img src="/img/no.png" /></td>
-                            <td v-if="!!thisinh.xacNhanBoHs"><img src="/img/yes.png" /></td>
-                            <td v-else><img src="/img/no.png" /></td>
-                            <td>{{thisinh.diaChi}}</td>
-                            <td></td>
-                        </tr>
-                    </table>
+                <template v-if="!thisinh.xacNhanGcn">
+                    <p>Anh/Chị cần thực hiện: a/ Tick vào lời cam đoan; b/ Nhập địa chỉ để nhận Giấy báo trúng tuyển; c/ Kích vào nút [Choose File] và làm theo yêu cầu trên điện thoại hoặc máy tính để chọn ảnh Giấy chứng nhận tốt nghiệp THPT (hoặc Bằng tốt nghiệp THPT).  Sau đó, kích nút [Lưu xác nhận nhập học].</p>
+                    <div class="sec1_1">
+                        <input type="checkbox" id="camdoan" name="camdoan" checked>
+                        <label for="camdoan"> Tôi cam đoan tôi đã tốt nghiệp THPT; nếu gian dối, tôi xin chịu hoàn toàn trách nhiệm.</label>
+                    </div>
+                    <div class="sec1_2">
+                        <label>Địa chỉ nhận Giấy báo:</label>
+                        <input v-model="form.DiaChi" type="text" id="diachi" value="">
+                    </div>
+                    <div class="sec1_2">
+                        <label>Nộp Giấy chứng nhận tốt nghiệp:</label>
+                        <input type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
+                        <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b><br>
+                        <button style="align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
+                    </div>
+                    <div v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">
+                        <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận Giấy chứng nhận/ Bằng tốt nghiệp.</p>
+                    </div>
+                </template>
+                <div v-else class="info">
+                    Anh chị đã hoàn tất bước này
                 </div>
             </div>
+
+            <template v-if="!!thisinh.xacNhanGcn">
+                <div class="sec2">
+                    <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
+                    <h4>Số tiền cần nộp (đồng): {{thisinh.soTien}}</h4>
+                    <p>
+                        Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="https://drive.google.com/file/d/1aYHOA6G6inefAK1ifUmOkuyy45rnFvfY/view" target="_blank">click vào đây</a> để xem hướng dẫn chi tiết thông tin gửi Bộ hồ sơ và nộp tiền.
+                    </p>
+                    <p class="as">Trân trọng cảm ơn Anh/Chị.</p>
+                </div>
+                <div class="sec3">
+                    <h3>TRẠNG THÁI TRƯỜNG NHẬN HỒ SƠ VÀ TIỀN:</h3>
+                    <div class="table_tinhtrang">
+                        <table>
+                            <tr>
+                                <th class="th1">GCN/BTN</th>
+                                <th class="th2">Bộ hồ sơ</th>
+                                <th class="th3">Tiền</th>
+                                <th class="th4">Địa chỉ nhận giấy báo</th>
+                                <th class="th5">Ghi chú</th>
+                            </tr>
+                            <tr>
+                                <td><img :src="getStatusImage(thisinh.xacNhanGcn)" alt="status"/></td>
+                                <td><img :src="getStatusImage(thisinh.xacNhanBoHs)" alt="status"/></td>
+                                <td><img :src="getStatusImage(thisinh.xacNhanTien)" alt="status"/></td>
+
+                                <td>{{thisinh.diaChi}}</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </template>
+
         </div>
         <div v-if="thisinh" class="img_wtm">
             <img src="/img/wtm.jpg"  alt="ok"/>

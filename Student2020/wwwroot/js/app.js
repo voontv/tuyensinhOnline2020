@@ -33,6 +33,13 @@ new Vue({
             this.form.imageFileName = file.name;
 
             reader.readAsDataURL(file);
+        },
+        getStatusImage: function (status){
+            if(!!status){
+                return "/img/yes.png";
+            }else{
+                return "/img/no.png";
+            }
         }
     }
 });
