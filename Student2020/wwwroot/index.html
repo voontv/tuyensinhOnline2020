@@ -54,13 +54,13 @@
                     <input type="file" accept="image/*" capture="camera" id="cntn" value="cntn">
                     <b>Link ảnh GCN đã nộp  và Link Ghi chú cho thí sinh</b>
                 </div>
-                <div class="sec1_3">
+                <div  v-if="!!thisinh.fileGcn && !thisinh.xacNhanGcn" class="sec1_3">
                     <button v-on:click="saveInfor">Lưu xác nhận nhập học</button>
                     <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận Giấy chứng nhận/ Bằng tốt nghiệp.</p>
                 </div>
 
             </div>
-            <div class="sec2">
+            <div v-if="!!thisinh.fileGcn && !!thisinh.xacNhanGcn" class="sec2">
                 <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
                 <h4><p>Số tiền cần nộp (đồng): 00.000.000</h4>
                 <p>
@@ -68,7 +68,7 @@
                 </p>
                 <p class="as">Trân trọng cảm ơn Anh/Chị.</p>
             </div>
-            <div class="sec3">
+            <div  v-if="!!thisinh.fileGcn && !!thisinh.xacNhanGcn" class="sec3">
                 <h3>TRẠNG THÁI TRƯỜNG NHẬN HỒ SƠ VÀ TIỀN:</h3>
                 <div class="table_tinhtrang">
                     <table>
@@ -116,7 +116,10 @@
             methods: {
                 getInformation: function (event) {
                     axios.get("api/ThiSinhs/" + this.cmnd)
-                        .then(response =>this.thisinh = response.data)
+                        .then(response => {
+                        this.thisinh = response.data;
+                            //this.uploadImage();
+                        })
                         .catch(() => this.error = true);
 
 
@@ -130,14 +133,22 @@
                         .catch(e => {
                             this.errors.push(e)
                         })
+                },               
+                uploadImage: function () {
+                    const selectedImage = document
+                        .querySelector('input[type=file]')
+                        .files[0]; // get first file
+                    this.createBase64Image(selectedImage);
+                    alert("xxxxxxxxxxxxxxxxxxxxxxx ");
+                },
+                createBase64Image: function(fileObject) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.image = e.target.result;
+                        this.uploadImage();
+                    };
+                    reader.readAsDataURL(fileObject);
                 }
-                //,
-               // settingVissibleElement: function (thisinh) {
-//
-                  //  if (thisinh.diachi_nhanGB != null) {
-                //        this.img1Src = "/img/no.png";
-                    //}
-                //}
                 
             }                      
         });
