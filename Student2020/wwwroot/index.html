@@ -10,6 +10,9 @@
     <script src="js/vue.js"></script>
 
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <title>Thông báo trúng tuyển</title>
 </head>
@@ -30,7 +33,9 @@
                         </div>
                         <div class="form_lg">
                             <div v-if="error">
-                                {{error}}
+                                <div class="alert alert-success" role="alert">
+                                    <span style="color:red; font-weight:bold">Bạn nhập không đúng số chứng minh nhân dân. Vui lòng nhâp lại.</span>
+                                </div>
                             </div>
                             <label for="cmnd">Nhập Số CMND:</label>
                             <input v-model="form.cmnd" type="text" value="" id="cmnd">
@@ -103,8 +108,8 @@
                             <br/>
                         </div>
                         <div class="sec1_3">
-                            <input type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
-                            <button style="align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
+                            <input type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)"> 
+                            <button v-on:click="submit">Lưu xác nhận nhập học</button>
                         </div>
                         
                     </div>

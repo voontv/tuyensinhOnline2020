@@ -1,4 +1,4 @@
-moment.locale('vi');
+﻿moment.locale('vi');
 
 const uri = 'api/ThiSinhs/';
 new Vue({
@@ -28,6 +28,7 @@ new Vue({
             axios.put(uri, this.form)
                 .then(() => {
                     this.getInformation();
+                    alert("Cập nhật thành công.");
                 })
                 .catch(e => {
                     console.log(e);
