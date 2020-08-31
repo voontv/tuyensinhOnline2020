@@ -102,13 +102,13 @@
                             </a>
                             <br/>
                         </div>
-                        <div>
-                            <input style="height:150px" type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
-                            <button style="height:150px align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
+                        <div class="sec1_3">
+                            <input value="Vui long chup hinh giay" type="file" accept="image/*" capture="camera" id="cntn" @change="getImage($event)">
+                            <button style="align-content:center" v-on:click="submit">Lưu xác nhận nhập học</button>
                         </div>
                         
                     </div>
-                    <div v-if="thisinh.fileGcn" class="sec1_3">
+                    <div v-if="thisinh.fileGcn">
                         <p>Vui lòng chờ khoảng 15 phút (trong giờ hành chính), Trường đang kiểm tra Giấy chứng nhận/Bằng TN.</p>
                     </div>
                     <div v-if="thisinh.note1" class="info-panel">

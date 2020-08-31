@@ -143,17 +143,28 @@ input#diachi {
     text-align: center;
 }
 
+.sec1_3 input {
+    font-size: 20px;
+    padding: 10px 20px;
+    background: #fff;
+    border: navajowhite;
+    font-weight:bold
+}
+
 .sec1_3 button {
-    font-size: 22px;
+    font-size: 20px;
     padding: 10px 20px;
     color: #fff;
     background: #0075ff;
     border: navajowhite;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .sec1_3 button:hover {
     background: blue;
+    border-radius: 4px;
 }
 
 .sec1_3 p {
