@@ -39,9 +39,14 @@ namespace Student2020
             Configuration.Bind(nameof(AppConfig), appConfig);
             services.AddSingleton(appConfig);
 
-            if (!Directory.Exists(appConfig.DataPath))
+            if (!Directory.Exists(appConfig.DocumentPath))
             {
-                Directory.CreateDirectory(appConfig.DataPath);
+                Directory.CreateDirectory(appConfig.DocumentPath);
+            }
+
+            if (!Directory.Exists(appConfig.ImagePath))
+            {
+                Directory.CreateDirectory(appConfig.ImagePath);
             }
         }
 

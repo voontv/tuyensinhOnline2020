@@ -151,7 +151,9 @@
                         </table>
                     </div>
                     <div v-if="!!thisinh.xacNhanTien" class="sec3_2">
-                        <h3>Chúc mừng Anh/Chị đã hoàn thành thủ tục nhập học. Anh/Chị theo dõi thông báo trên Website chính của Trường để biết việc tập trung đến Trường để học tập.<a href="">Tải giấy báo nhập học tại đây.</a></h3>
+                        <h3>Chúc mừng Anh/Chị đã hoàn thành thủ tục nhập học. Anh/Chị theo dõi thông báo trên Website chính của Trường để biết việc tập trung đến Trường để học tập.</h3>
+                        <br/>
+                        <a :href="getDocumentDownloadUrl()">Tải giấy báo nhập học tại đây.</a>
                     </div>
                 </div>
             </template>

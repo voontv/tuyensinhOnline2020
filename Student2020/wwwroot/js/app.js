@@ -30,6 +30,9 @@ new Vue({
         getDownloadUrl(file){
           return uri + "download/"+ file;
         },
+        getDocumentDownloadUrl() {
+            return uri + "download-pdf/" + this.thisinh.cmnd + ".pdf";
+        },
         getImage: function (e) {
             const reader = new FileReader();
             reader.onload = (x) => {

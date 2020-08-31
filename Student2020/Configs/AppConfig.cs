@@ -2,6 +2,8 @@ namespace Student2020.Configs
 {
     public class AppConfig
     {
-        public string DataPath { get; set; }
+        public string ImagePath { get; set; }
+
+        public string DocumentPath { get; set; }
     }
 }

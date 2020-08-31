@@ -45,11 +45,9 @@ namespace Student2020.Controllers
             return thiSinh;
         }
 
-        [HttpGet]
-        [Route("download/{fileName}")]
-        public IActionResult GetFile(string fileName)
+        private IActionResult GetFile(string folder, string fileName)
         {
-            var path = Path.Combine(appConfig.DataPath, fileName);
+            var path = Path.Combine(folder, fileName);
             if (IOFile.Exists(path))
             {
                 var stream = IOFile.OpenRead(path);
@@ -57,6 +55,20 @@ namespace Student2020.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpGet]
+        [Route("download/{fileName}")]
+        public IActionResult DownloadImage(string fileName)
+        {
+            return GetFile(appConfig.ImagePath, fileName);
+        }
+
+        [HttpGet]
+        [Route("download-pdf/{fileName}")]
+        public IActionResult DownloadPdf(string fileName)
+        {
+            return GetFile(appConfig.DocumentPath, fileName);
         }
 
         [HttpPut]
@@ -77,12 +89,12 @@ namespace Student2020.Controllers
                 var base64Mark = "base64,";
                 var fileContent = Convert.FromBase64String(inforNewSinhVien.ImageData.Substring(inforNewSinhVien.ImageData.IndexOf(base64Mark) + base64Mark.Length));
 
-                foreach (var existingFile in Directory.EnumerateFiles(appConfig.DataPath, inforNewSinhVien.CMND + ".*"))
+                foreach (var existingFile in Directory.EnumerateFiles(appConfig.ImagePath, inforNewSinhVien.CMND + ".*"))
                 {
                     IOFile.Delete(existingFile);
                 }
 
-                var fileName = Path.Combine(appConfig.DataPath, inforNewSinhVien.CMND + Path.GetExtension(inforNewSinhVien.ImageFileName));
+                var fileName = Path.Combine(appConfig.ImagePath, inforNewSinhVien.CMND + Path.GetExtension(inforNewSinhVien.ImageFileName));
                 await IOFile.WriteAllBytesAsync(fileName, fileContent);
                 existing.FileGcn = fileName;
             }
