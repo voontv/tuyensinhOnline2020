@@ -69,17 +69,17 @@
                 <p><b>Thí sinh:</b>{{thisinh.hotenTs}}</p>
                 <p><b>Số CMND:</b>{{thisinh.cmnd}}</p>
                 <p><b>Sinh ngày:</b>{{thisinh.ngaySinh | dtFormat()}}</p>
-                <p><b>Trúng tuyển ngành:</b>{{thisinh.tenNganh}}</p>
+                <p><b>Đạt điều kiện học ngành:</b>{{thisinh.tenNganh}}</p>
                 <p><b>Mã ngành:</b>{{thisinh.maNganh}}</p>
                 <br />
-                <p><h4>Nhà trường mời Anh/Chị làm thủ tục nhập học, gồm 3 bước thực hiện như sau:</h4></p>
+                <p><h4>Anh/Chị cần cung cấp minh chứng Anh/Chị tốt nghiệp THPT để Trường công nhận trúng tuyển. Mời Anh/Chị thực hiện tiếp 3 bước sau đây để hoàn tất thủ tục nhập học:</h4></p>
             </div>
 
             <div class="sec1">               
                 <h3>Bước 1: Nộp Giấy chứng nhận tốt nghiệp THPT</h3>
 
                 <template v-if="!thisinh.xacNhanGcn">
-                    <p>Anh/Chị cần thực hiện: a/ Tick xác nhận vào lời cam đoan; b/ Nhập địa chỉ để nhận Giấy báo trúng tuyển; c/ Kích vào nút [Choose File] và làm theo yêu cầu trên điện thoại hoặc máy tính để chọn ảnh Giấy chứng nhận tốt nghiệp THPT (hoặc Bằng tốt nghiệp THPT).  Sau đó, kích nút [Lưu xác nhận nhập học].</p>
+                    <p>Anh/Chị cần thực hiện: a/ Tic xác nhận vào lời cam đoan; b/ Nhập địa chỉ để nhận Giấy báo trúng tuyển; c/ Kích vào nút [Choose File] và làm theo yêu cầu trên điện thoại hoặc máy tính để chọn ảnh Giấy chứng nhận tốt nghiệp THPT (hoặc Bằng tốt nghiệp THPT).  Sau đó, kích nút [Lưu xác nhận nhập học].</p>
                     <div class="sec1_1">
                         <input type="checkbox" id="camdoan" name="camdoan" checked>
                         <label for="camdoan"> Tôi cam đoan tôi đã tốt nghiệp THPT. Nếu gian dối, tôi sẽ phải chịu hoàn toàn trách nhiệm.</label>
@@ -109,14 +109,14 @@
                         
                     </div>
                     <div v-if="thisinh.fileGcn" class="sec1_3">
-                        <p>Anh/Chị chờ khoảng 15 phút (trong giờ hành chính) để Nhà trường xác nhận đã nhận được Giấy chứng nhận/ Bằng tốt nghiệp.</p>
+                        <p>Vui lòng chờ khoảng 15 phút (trong giờ hành chính), Trường đang kiểm tra Giấy chứng nhận/Bằng TN.</p>
                     </div>
                     <div v-if="thisinh.note1" class="info-panel">
                         {{thisinh.note1}}
                     </div>
                 </template>
                 <div v-else class="info-panel">
-                    Anh chị đã hoàn tất bước này
+                    Anh chị đã hoàn tất bước này.
                 </div>
             </div>
 
@@ -125,12 +125,12 @@
                     <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
                     <h4>Số tiền cần nộp (đồng): {{thisinh.soTien}}</h4>
                     <p>
-                        Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="https://drive.google.com/file/d/1aYHOA6G6inefAK1ifUmOkuyy45rnFvfY/view" target="_blank">click vào đây</a> để xem hướng dẫn chi tiết thông tin gửi Bộ hồ sơ và nộp tiền.
+                        Anh/Chị cần gửi Bộ hồ sơ nhập học về Trường Đại học Bách khoa trước 17 giờ ngày 05/9/2020 (tính theo dấu bưu điện) và nộp số tiền nói trên vào tài khoản của Trường Đại học Bách khoa trước 17h ngày 08/9/2020. Anh/Chị <a href="https://drive.google.com/file/d/1aYHOA6G6inefAK1ifUmOkuyy45rnFvfY/view" target="_blank">kích vào đây</a> để xem chi tiết hướng dẫn gửi Bộ hồ sơ và nộp tiền.
                     </p>
                     <p class="as">Trân trọng cảm ơn Anh/Chị.</p>
                 </div>
                 <div class="sec3">
-                    <h3>TRẠNG THÁI TRƯỜNG NHẬN HỒ SƠ VÀ TIỀN:</h3>
+                    <h3>Trạng thái Nhà trường nhận hồ sơ và tiền:</h3>
                     <div class="table_tinhtrang">
                         <table>
                             <tr>
@@ -151,7 +151,7 @@
                         </table>
                     </div>
                     <div v-if="!!thisinh.xacNhanTien" class="sec3_2">
-                        <h3>Chúc mừng Anh/Chị đã hoàn thành thủ tục nhập học. Anh/Chị theo dõi thông báo trên Website chính của Trường để biết việc tập trung đến Trường để học tập.</h3>
+                        <h3>Chúc mừng Anh/Chị đã hoàn thành thủ tục nhập học. Anh/Chị theo dõi thông báo trên Website chính (http://dut.udn.vn) của Trường để biết việc tập trung đến Trường để học tập.</h3>
                         <h3>
                             <a :href="getDocumentDownloadUrl()">Tải giấy báo nhập học tại đây.</a>
                         </h3>
