@@ -179,6 +179,12 @@ input#diachi {
     color: blue;
 }
 
+.sec3_2 h3 {
+    font-size: 18px;
+    color: #0075ff;
+    margin-top: 50px;
+}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
