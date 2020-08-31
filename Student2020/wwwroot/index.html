@@ -5,10 +5,9 @@
     <meta http-equiv="content-type" content="text/html" />
     <meta name="author" content="Thông tin tuyển sinh" />
 
+    <script src="js/moment-with-locales.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/vue.js"></script>
-
-
 
     <link rel="stylesheet" href="css/style.css" />
 
@@ -69,10 +68,11 @@
             <div class="info">
                 <p><b>Thí sinh:</b>{{thisinh.hotenTs}}</p>
                 <p><b>Số CMND:</b>{{thisinh.cmnd}}</p>
-                <p><b>Sinh ngày:</b>{{thisinh.ngaySinh}}</p>
+                <p><b>Sinh ngày:</b>{{thisinh.ngaySinh | dtFormat()}}</p>
                 <p><b>Trúng tuyển ngành:</b>{{thisinh.tenNganh}}</p>
                 <p><b>Mã ngành:</b>{{thisinh.maNganh}}</p>
-                <h4>Nhà trường mời Anh/Chị làm thủ tục nhập học, gồm 3 bước thực hiện như sau:</h4>
+                <br />
+                <p><h4>Nhà trường mời Anh/Chị làm thủ tục nhập học, gồm 3 bước thực hiện như sau:</h4></p>
             </div>
 
             <div class="sec1">               
@@ -152,7 +152,6 @@
                     </div>
                     <div v-if="!!thisinh.xacNhanTien" class="sec3_2">
                         <h3>Chúc mừng Anh/Chị đã hoàn thành thủ tục nhập học. Anh/Chị theo dõi thông báo trên Website chính của Trường để biết việc tập trung đến Trường để học tập.</h3>
-                        <br/>
                         <h3>
                             <a :href="getDocumentDownloadUrl()">Tải giấy báo nhập học tại đây.</a>
                         </h3>

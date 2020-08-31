@@ -1,3 +1,5 @@
+moment.locale('vi');
+
 const uri = 'api/ThiSinhs/';
 new Vue({
     el: '#app',
@@ -7,6 +9,11 @@ new Vue({
             cmnd: ""
         },
         error: ''
+    },
+    filters: {
+        dtFormat(dt) {
+            return moment.utc(dt).format('L');
+        }
     },
     methods: {
         getInformation: function () {
