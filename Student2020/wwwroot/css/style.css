@@ -71,7 +71,7 @@ body {
 }
 
 .info p b {
-    width: 220px;
+    width: 240px;
     float: left;
     font-weight: 100;
     font-size: 20px;
@@ -93,6 +93,7 @@ body {
 
 .sec1_1 {
     font-size: 20px;
+    width: 800px;
 }
 
 .sec1_2 {
@@ -101,7 +102,7 @@ body {
 }
 
 input#diachi {
-    width: 500px;
+    width: 800px;
     height: 28px;
     font-size: 20px;
     font-family: "Times New Roman", Times, serif;

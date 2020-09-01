@@ -82,7 +82,7 @@ namespace Student2020.Controllers
             }
 
             existing.DiaChi = inforNewSinhVien.DiaChi;
-            existing.NgayNopGcn = DateTime.Now;
+            
 
             if (inforNewSinhVien.ImageData != null)
             {
@@ -97,6 +97,7 @@ namespace Student2020.Controllers
                 var fileName = Path.Combine(appConfig.ImagePath, inforNewSinhVien.CMND + Path.GetExtension(inforNewSinhVien.ImageFileName));
                 await IOFile.WriteAllBytesAsync(fileName, fileContent);
                 existing.FileGcn = fileName;
+                existing.NgayNopGcn = DateTime.Now;
             }
 
             await context.SaveChangesAsync();
