@@ -13,5 +13,7 @@ namespace Student2020.Models
         public string ImageData { get; set; }
 
         public string ImageFileName { get; set; }
+
+        public string NganhChon { get; set; }
     }
 }

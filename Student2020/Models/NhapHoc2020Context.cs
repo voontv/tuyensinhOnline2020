@@ -53,6 +53,10 @@ namespace Student2020.Models
 
                 entity.Property(e => e.MaNganh).HasMaxLength(15);
 
+                entity.Property(e => e.MaNganh2).HasMaxLength(15);
+
+                entity.Property(e => e.MaChon).HasMaxLength(15);
+
                 entity.Property(e => e.NgayNopGcn)
                     .HasColumnName("NgayNopGCN")
                     .HasColumnType("datetime");
@@ -60,6 +64,8 @@ namespace Student2020.Models
                 entity.Property(e => e.Note1).HasMaxLength(250);
           
                 entity.Property(e => e.TenNganh).HasMaxLength(250);
+
+                entity.Property(e => e.TenNganh2).HasMaxLength(250);
 
                 entity.Property(e => e.UsXacNhanBoHs)
                     .HasColumnName("Us_XacNhanBoHS")

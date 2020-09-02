@@ -6,7 +6,8 @@ new Vue({
     data: {
         thisinh: null,
         form: {
-            cmnd: ""
+            cmnd: "",
+            nganhChon: null
         },
         error: ''
     },
@@ -25,6 +26,11 @@ new Vue({
                 .catch(() => this.error = true);
         },
         submit: function () {
+            if (this.form.nganhChon == null && this.thisinh.maNganh2 != null && this.thisinh.maChon == null)
+            {
+                alert("Anh/Chị cần chọn 1 ngành học, không được để trống.");
+                return true;
+            }
             axios.put(uri, this.form)
                 .then(() => {
                     this.getInformation();

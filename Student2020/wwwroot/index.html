@@ -74,8 +74,37 @@
                 <p><b>Thí sinh:</b>{{thisinh.hotenTs}}</p>
                 <p><b>Số CMND:</b>{{thisinh.cmnd}}</p>
                 <p><b>Sinh ngày:</b>{{thisinh.ngaySinh | dtFormat()}}</p>
-                <p><b>Đạt điều kiện học ngành:</b>{{thisinh.tenNganh}}</p>
-                <p><b>Mã ngành:</b>{{thisinh.maNganh}}</p>
+
+                <div v-if="thisinh.maNganh2 && !thisinh.maChon">
+                    <p>
+                        <b>Đạt điều kiện học ngành:</b>
+                        <div id="root">
+                            <div class="card-block">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <input v-model="form.nganhChon" id="nganh1" type="radio" :value="thisinh.maNganh">
+                                    <label for="nganh1">{{thisinh.maNganh}} - {{thisinh.tenNganh}}</label>
+
+                                    <br>
+
+                                    <input v-model="form.nganhChon" id="nganh2" type="radio" :value="thisinh.maNganh2">
+                                    <label for="nganh2">{{thisinh.maNganh2}} - {{thisinh.tenNganh2}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+
+                <div v-else>
+                    <div v-if="thisinh.maChon && thisinh.maChon == thisinh.maNganh2">
+                        <p><b>Đạt điều kiện học ngành:</b>{{thisinh.tenNganh2}}</p>
+                        <p><b>Mã ngành:</b>{{thisinh.maNganh2}}</p>
+                    </div>
+                    <div v-else>
+                        <p><b>Đạt điều kiện học ngành:</b>{{thisinh.tenNganh}}</p>
+                        <p><b>Mã ngành:</b>{{thisinh.maNganh}}</p>
+                    </div>
+                </div>
+
                 <br />
                 <p><h4>Mời Anh/Chị thực hiện tiếp 3 bước sau đây để chính thức được công nhận trúng tuyển & hoàn tất thủ tục nhập học:</h4></p>
             </div>

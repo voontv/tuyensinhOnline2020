@@ -64,6 +64,12 @@ body {
     font-size: 40px;
 }
 
+.card-block {
+    font-size: 20px;
+    font-weight: 600;
+    font-size: 22px;
+}
+
 .info p {
     font-size: 20px;
     font-weight: 600;

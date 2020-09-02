@@ -82,6 +82,11 @@ namespace Student2020.Controllers
             }
 
             existing.DiaChi = inforNewSinhVien.DiaChi;
+
+            if(!string.IsNullOrEmpty(inforNewSinhVien.NganhChon))
+            {
+                existing.MaChon = inforNewSinhVien.NganhChon;
+            }
             
 
             if (inforNewSinhVien.ImageData != null)
