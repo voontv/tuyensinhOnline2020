@@ -23,6 +23,7 @@ namespace Student2020.Models
         public string UsXacNhanTien { get; set; }
 
         public int? SoTien { set; get; }
+        public int? SoTien2 { set; get; }
         public DateTime? NgaySinh { get; set; }
         public string MaNganh2 { get; set; }
         public string TenNganh2 { get; set; }

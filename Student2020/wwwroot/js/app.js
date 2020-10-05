@@ -64,6 +64,10 @@ new Vue({
             }else{
                 return "/img/no.png";
             }
+        },
+        formatPrice: function (value) {
+            let val = (value / 1)
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }
     }
 });
