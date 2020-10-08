@@ -73,7 +73,7 @@
             <div class="info">
                 <p><b>Thí sinh:</b>{{thisinh.hotenTs}}</p>
                 <p><b>Số CMND:</b>{{thisinh.cmnd}}</p>
-                <p><b>Sinh ngày:</b>{{thisinh.ngaySinh | dtFormat()}}</p>
+                <!--<p><b>Sinh ngày:</b>{{thisinh.ngaySinh | dtFormat()}}</p>-->
 
                 <div v-if="thisinh.maNganh2 && !thisinh.maChon">
                     <p>
@@ -96,16 +96,20 @@
 
                 <div v-else>
                     <div v-if="thisinh.maChon && thisinh.maChon == thisinh.maNganh2">
-                        <p><b>Đạt điều kiện học ngành:</b>{{thisinh.tenNganh2}}</p>
+                        <p><b>Trúng tuyển ngành:</b>{{thisinh.tenNganh2}}</p>
                         <p><b>Mã ngành:</b>{{thisinh.maNganh2}}</p>
                     </div>
                     <div v-else>
-                        <p><b>Đạt điều kiện học ngành:</b>{{thisinh.tenNganh}}</p>
+                        <p><b>Trúng tuyển ngành:</b>{{thisinh.tenNganh}}</p>
                         <p><b>Mã ngành:</b>{{thisinh.maNganh}}</p>
+                        <div class="sec2">
+                            <h4 v-if="thisinh.maChon == thisinh.maNganh">Số tiền cần nộp (đồng): {{formatPrice(thisinh.soTien)}}</h4>
+                            <h4 v-else>Số tiền cần nộp (đồng): {{formatPrice(thisinh.soTien2)}}</h4>
+                        </div>
                     </div>
                 </div>
 
-                <br />
+                <br/>
                 <br/>
                 
                 <div>
@@ -116,10 +120,10 @@
                 </div>
 
                 <br />
-                <p><h4>Mời Anh/Chị thực hiện tiếp 3 bước sau đây để chính thức được công nhận trúng tuyển & hoàn tất thủ tục nhập học:</h4></p>
+                <!--<p><h4>Mời Anh/Chị thực hiện tiếp 3 bước sau đây để chính thức được công nhận trúng tuyển & hoàn tất thủ tục nhập học:</h4></p>-->
             </div>
 
-            <div class="sec1">               
+            <!--<div class="sec1">               
                 <h3>Bước 1: Nộp Giấy chứng nhận tốt nghiệp THPT</h3>
 
                 <template v-if="!thisinh.xacNhanGcn">
@@ -161,9 +165,9 @@
                 <div v-else class="info-panel">
                     Anh chị đã hoàn tất bước này.
                 </div>
-            </div>
+            </div>-->
 
-            <template v-if="!!thisinh.xacNhanGcn">
+            <!--<template v-if="!!thisinh.xacNhanGcn">
                 <div class="sec2">
                     <h3>Bước 2, 3: Nộp Bộ hồ sơ nhập học và nộp tiền</h3>
                     <h4 v-if="thisinh.maChon == thisinh.maNganh">Số tiền cần nộp (đồng): {{formatPrice(thisinh.soTien)}}</h4>
@@ -197,12 +201,12 @@
                     </div>
                     <div v-if="!!thisinh.xacNhanTien" class="sec3_2">
                         <h3>Chúc mừng Anh/Chị đã hoàn thành thủ tục nhập học. Anh/Chị theo dõi thông báo trên Website chính <a href="http://dut.udn.vn" target="_blank"> (http://dut.udn.vn)</a> của Trường để biết việc tập trung đến Trường để học tập.</h3>
-                        <!--<h3>
+                        <h3>
                             <a :href="getDocumentDownloadUrl()">Tải giấy báo nhập học tại đây.</a>
-                        </h3>-->
+                        </h3>
                     </div>
                 </div>
-            </template>
+            </template>-->
 
             <br/>
             
