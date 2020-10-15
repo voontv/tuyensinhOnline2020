@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,8 @@ namespace Student2020
             {
                 Directory.CreateDirectory(appConfig.ImagePath);
             }
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         private static void ConfigOptions(MvcOptions option)
