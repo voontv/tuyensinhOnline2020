@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Student2020.Models
 {
@@ -28,5 +29,8 @@ namespace Student2020.Models
         public string MaNganh2 { get; set; }
         public string TenNganh2 { get; set; }
         public string MaChon { get; set; }
+
+        [NotMapped]
+        public string CmndImg { get; set; }
     }
 }

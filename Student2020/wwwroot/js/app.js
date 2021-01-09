@@ -41,11 +41,11 @@ new Vue({
                     this.errors.push(e);
                 })
         },
-        getDownloadUrl(file){
-          return uri + "download/"+ file;
+        getDownloadUrl(file) {
+            return uri + "download/" + file + "?cmnd=" + this.thisinh.cmnd;
         },
         getDocumentDownloadUrl() {
-            return uri + "download-pdf/" + this.thisinh.cmnd + ".pdf";
+            return uri + "download-pdf/" + this.thisinh.cmndImg + "?cmnd=" + this.thisinh.cmnd;
         },
         getImage: function (e) {
             const reader = new FileReader();

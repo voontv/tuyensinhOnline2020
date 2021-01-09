@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Student2020.Configs;
 using Student2020.Handler;
 using Student2020.Models;
+using Student2020.Utils;
 using IOFile = System.IO.File;
 
 namespace Student2020.Controllers
@@ -47,8 +49,10 @@ namespace Student2020.Controllers
 
             if (!string.IsNullOrEmpty(thiSinh.FileGcn))
             {
-                thiSinh.FileGcn = Path.GetFileName(thiSinh.FileGcn);
+                thiSinh.FileGcn = HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd, Path.GetFileName(thiSinh.FileGcn)));
             }
+
+            thiSinh.CmndImg = HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd, cmnd + ".pdf"));
 
             return thiSinh;
         }
@@ -67,15 +71,17 @@ namespace Student2020.Controllers
 
         [HttpGet]
         [Route("download/{fileName}")]
-        public IActionResult DownloadImage(string fileName)
+        public IActionResult DownloadImage(string fileName, string cmnd)
         {
+            fileName = RC4Encrypt.Decrypt(cmnd, HexaEncode.Decode(fileName));
             return GetFile(appConfig.ImagePath, fileName);
         }
 
         [HttpGet]
         [Route("download-pdf/{fileName}")]
-        public IActionResult DownloadPdf(string fileName)
+        public IActionResult DownloadPdf(string fileName, string cmnd)
         {
+            fileName = RC4Encrypt.Decrypt(cmnd, HexaEncode.Decode(fileName));
             return GetFile(appConfig.DocumentPath, fileName);
         }
 

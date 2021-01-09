@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using CustomerDawacoIT.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Student2020.Handler;
+using Student2020.Utils;
 using IOFile = System.IO.File;
 
 namespace CustomerDawacoIT.Controllers
@@ -56,8 +59,10 @@ namespace CustomerDawacoIT.Controllers
 
         [HttpGet]
         [Route("download-pdf/{fileName}")]
-        public IActionResult DownloadPdf(string fileName)
+        //[TypeFilter(typeof(IPFilterAttribute))]
+        public IActionResult DownloadPdf(string fileName, string cmnd)
         {
+            fileName = RC4Encrypt.Decrypt(cmnd, HexaEncode.Decode(fileName));
             return GetFile(_webHostEnvironment.WebRootPath + "\\uploads\\", fileName);
         }
 
