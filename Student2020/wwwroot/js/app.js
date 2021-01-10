@@ -41,12 +41,6 @@ new Vue({
                     this.errors.push(e);
                 })
         },
-        getDownloadUrl(file) {
-            return uri + "download/" + file;
-        },
-        getDocumentDownloadUrl() {
-            return uri + "download-pdf/" + this.thisinh.cmndImg;
-        },
         getImage: function (e) {
             const reader = new FileReader();
             reader.onload = (x) => {

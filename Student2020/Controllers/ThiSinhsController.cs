@@ -49,10 +49,10 @@ namespace Student2020.Controllers
 
             if (!string.IsNullOrEmpty(thiSinh.FileGcn))
             {
-                thiSinh.FileGcn = HexaEncode.Encode(RC4Encrypt.Encrypt(Path.GetFileName(thiSinh.FileGcn)));
+                thiSinh.FileGcn = "api/thisinh/download/" + HexaEncode.Encode(RC4Encrypt.Encrypt(Path.GetFileName(thiSinh.FileGcn)));
             }
 
-            thiSinh.CmndImg = HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd + ".pdf"));
+            thiSinh.CmndImg = "api/thisinh/download-pdf/" + HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd + ".pdf"));
 
             return thiSinh;
         }
