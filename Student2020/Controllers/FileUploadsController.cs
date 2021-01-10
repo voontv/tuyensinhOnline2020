@@ -60,9 +60,9 @@ namespace CustomerDawacoIT.Controllers
         [HttpGet]
         [Route("download-pdf/{fileName}")]
         //[TypeFilter(typeof(IPFilterAttribute))]
-        public IActionResult DownloadPdf(string fileName, string cmnd)
+        public IActionResult DownloadPdf(string fileName)
         {
-            fileName = RC4Encrypt.Decrypt(cmnd, HexaEncode.Decode(fileName));
+            fileName = RC4Encrypt.Decrypt(HexaEncode.Decode(fileName));
             return GetFile(_webHostEnvironment.WebRootPath + "\\uploads\\", fileName);
         }
 

@@ -11,18 +11,14 @@ namespace Student2020.Utils
         private static readonly Encoding unicode = Encoding.Unicode;
         private static readonly string privateKey = "GPD8uUvWvSJ8tRXqEYSs";
 
-        public static string Encrypt(string key, string data)
+        public static string Encrypt(string data)
         {
-            key = key.Trim().ToLower();
-            data = data.Trim().ToLower();
-            return Convert.ToBase64String(Encrypt(unicode.GetBytes(key + privateKey), unicode.GetBytes(data)));
+            return Convert.ToBase64String(Encrypt(unicode.GetBytes(privateKey), unicode.GetBytes(data)));
         }
 
-        public static string Decrypt(string key, string data)
+        public static string Decrypt(string data)
         {
-            key = key.Trim().ToLower();
-            data = data.Trim().ToLower();
-            return unicode.GetString(Encrypt(unicode.GetBytes(key + privateKey), Convert.FromBase64String(data)));
+            return unicode.GetString(Encrypt(unicode.GetBytes(privateKey), Convert.FromBase64String(data)));
         }
 
         private static byte[] Encrypt(byte[] key, byte[] data)

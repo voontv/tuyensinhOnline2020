@@ -42,10 +42,10 @@ new Vue({
                 })
         },
         getDownloadUrl(file) {
-            return uri + "download/" + file + "?cmnd=" + this.thisinh.cmnd;
+            return uri + "download/" + file;
         },
         getDocumentDownloadUrl() {
-            return uri + "download-pdf/" + this.thisinh.cmndImg + "?cmnd=" + this.thisinh.cmnd;
+            return uri + "download-pdf/" + this.thisinh.cmndImg;
         },
         getImage: function (e) {
             const reader = new FileReader();

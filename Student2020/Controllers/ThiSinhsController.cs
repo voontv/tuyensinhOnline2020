@@ -49,10 +49,10 @@ namespace Student2020.Controllers
 
             if (!string.IsNullOrEmpty(thiSinh.FileGcn))
             {
-                thiSinh.FileGcn = HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd, Path.GetFileName(thiSinh.FileGcn)));
+                thiSinh.FileGcn = HexaEncode.Encode(RC4Encrypt.Encrypt(Path.GetFileName(thiSinh.FileGcn)));
             }
 
-            thiSinh.CmndImg = HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd, cmnd + ".pdf"));
+            thiSinh.CmndImg = HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd + ".pdf"));
 
             return thiSinh;
         }
@@ -71,17 +71,17 @@ namespace Student2020.Controllers
 
         [HttpGet]
         [Route("download/{fileName}")]
-        public IActionResult DownloadImage(string fileName, string cmnd)
+        public IActionResult DownloadImage(string fileName)
         {
-            fileName = RC4Encrypt.Decrypt(cmnd, HexaEncode.Decode(fileName));
+            fileName = RC4Encrypt.Decrypt(HexaEncode.Decode(fileName));
             return GetFile(appConfig.ImagePath, fileName);
         }
 
         [HttpGet]
         [Route("download-pdf/{fileName}")]
-        public IActionResult DownloadPdf(string fileName, string cmnd)
+        public IActionResult DownloadPdf(string fileName)
         {
-            fileName = RC4Encrypt.Decrypt(cmnd, HexaEncode.Decode(fileName));
+            fileName = RC4Encrypt.Decrypt(HexaEncode.Decode(fileName));
             return GetFile(appConfig.DocumentPath, fileName);
         }
 
