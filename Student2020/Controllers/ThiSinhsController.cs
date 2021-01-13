@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Student2020.Configs;
 using Student2020.Handler;
 using Student2020.Models;
@@ -49,12 +50,25 @@ namespace Student2020.Controllers
 
             if (!string.IsNullOrEmpty(thiSinh.FileGcn))
             {
-                thiSinh.FileGcn = "api/thisinh/download/" + HexaEncode.Encode(RC4Encrypt.Encrypt(Path.GetFileName(thiSinh.FileGcn)));
+                thiSinh.FileGcn = "api/thisinhs/download/" + CreateFileToken(Path.GetFileName(thiSinh.FileGcn));
             }
 
-            thiSinh.CmndImg = "api/thisinh/download-pdf/" + HexaEncode.Encode(RC4Encrypt.Encrypt(cmnd + ".pdf"));
+            thiSinh.CmndImg = "api/thisinhs/download-pdf/" + CreateFileToken(cmnd + ".pdf");
 
             return thiSinh;
+        }
+
+        private string CreateFileToken(string fileName)
+        {
+            var fileDownload = new FileDownload()
+            {
+                FileName = fileName,
+                ValidFrom = DateTime.Now
+            };
+
+            var token = JsonConvert.SerializeObject(fileDownload);
+
+            return HexaEncode.Encode(RC4Encrypt.Encrypt(token));
         }
 
         private IActionResult GetFile(string folder, string fileName)
@@ -69,20 +83,32 @@ namespace Student2020.Controllers
             return NotFound();
         }
 
+        private string DecryptToken(string token)
+        {
+            var decrypted = RC4Encrypt.Decrypt(HexaEncode.Decode(token));
+
+            var file = JsonConvert.DeserializeObject<FileDownload>(decrypted);
+
+            if(DateTime.Now - file.ValidFrom > TimeSpan.FromHours(1))
+            {
+                throw new BadRequestException("Invalid token");
+            }
+
+            return file.FileName;
+        }
+
         [HttpGet]
         [Route("download/{fileName}")]
         public IActionResult DownloadImage(string fileName)
         {
-            fileName = RC4Encrypt.Decrypt(HexaEncode.Decode(fileName));
-            return GetFile(appConfig.ImagePath, fileName);
+            return GetFile(appConfig.ImagePath, DecryptToken(fileName));
         }
 
         [HttpGet]
         [Route("download-pdf/{fileName}")]
         public IActionResult DownloadPdf(string fileName)
         {
-            fileName = RC4Encrypt.Decrypt(HexaEncode.Decode(fileName));
-            return GetFile(appConfig.DocumentPath, fileName);
+            return GetFile(appConfig.DocumentPath, DecryptToken(fileName));
         }
 
         [HttpPut]
