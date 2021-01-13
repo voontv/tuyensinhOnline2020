@@ -29,14 +29,6 @@ namespace Student2020.Controllers
             this.appConfig = appConfig;
         }
 
-        [HttpGet]
-        [Route("test")]
-        [TypeFilter(typeof(IPFilterAttribute))]
-        public string Test()
-        {
-            return "Hello";
-        }
-
         private async Task<ThiSinh> FindThiSinh(string cmnd)
         {
             return await context.ThiSinh.FirstOrDefaultAsync(x => x.Cmnd == cmnd)

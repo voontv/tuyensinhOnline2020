@@ -25,7 +25,7 @@ namespace Student2020.Handler
 
             if (!File.Exists(fileName))
             {
-                context.Result = context.Result = new ObjectResult("Chưa config IP")
+                context.Result = context.Result = new ObjectResult("Chưa config IP:  " + Path.Combine(Directory.GetCurrentDirectory(), fileName))
                 {
                     StatusCode = (int)HttpStatusCode.BadRequest
                 };
