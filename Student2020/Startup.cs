@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Student2020.Configs;
+using Student2020.ForumDb;
 using Student2020.Handler;
 using Student2020.Models;
 
@@ -32,6 +33,11 @@ namespace Student2020
         {
             services.AddDbContext<NhapHoc2020Context>(opt =>
                opt.UseSqlServer(Configuration.GetSection("StrConnection").Value));
+
+            services.AddDbContext<ForumDbContext>(opt =>
+               opt.UseSqlServer(Configuration.GetSection("StrConnectionForum").Value));
+
+            
             services.AddControllers();
             services.AddMvc(ConfigOptions);
             services.AddCors();
