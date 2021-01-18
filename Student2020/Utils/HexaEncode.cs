@@ -15,13 +15,13 @@ namespace Student2020.Utils
             return (char) ('A' + (value - 10));
         }
 
-        private static int FromHex(char value)
+        private static byte FromHex(char value)
         {
-            if (value <= '9') return value - '0';
-            return value - 'A' + 10;
+            if (value <= '9') return (byte) (value - '0');
+            return (byte) (value - 'A' + 10);
         }
 
-        public static string Encode(string msg)
+        public static string Encode(byte[] msg)
         {
             var buffer = new StringBuilder();
             foreach(var ch in msg)
@@ -33,16 +33,16 @@ namespace Student2020.Utils
             return buffer.ToString();
         }
 
-        public static string Decode(string msg)
+        public static byte[] Decode(string msg)
         {
-            var buffer = new StringBuilder();
-            for(var i=0; i< msg.Length; i+= 2)
+            var data = new byte[msg.Length / 2];
+
+            for(var i=0; i <msg.Length; i+= 2)
             {
-                var value = (char) (FromHex(msg[i]) * 16 + FromHex(msg[i + 1]));
-                buffer.Append(value);
+                data[i/2] = (byte)((FromHex(msg[i]) << 4) | FromHex(msg[i + 1]));
             }
 
-            return buffer.ToString();
+            return data;
         }
     }
 }

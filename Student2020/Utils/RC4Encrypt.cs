@@ -8,17 +8,17 @@ namespace Student2020.Utils
 {
     public static class RC4Encrypt
     {
-        private static readonly Encoding unicode = Encoding.Unicode;
-        private static readonly string privateKey = "GPD8uUvWvSJ8tRXqEYSs";
+        private static readonly Encoding unicode = Encoding.ASCII;
+        private static readonly string privateKey = "GPD8uUSs";
 
-        public static string Encrypt(string data)
+        public static byte[] Encrypt(string data)
         {
-            return Convert.ToBase64String(Encrypt(unicode.GetBytes(privateKey), unicode.GetBytes(data)));
+            return Encrypt(unicode.GetBytes(privateKey), unicode.GetBytes(data));
         }
 
-        public static string Decrypt(string data)
+        public static string Decrypt(byte[] data)
         {
-            return unicode.GetString(Encrypt(unicode.GetBytes(privateKey), Convert.FromBase64String(data)));
+            return unicode.GetString(Encrypt(unicode.GetBytes(privateKey), data));
         }
 
         private static byte[] Encrypt(byte[] key, byte[] data)

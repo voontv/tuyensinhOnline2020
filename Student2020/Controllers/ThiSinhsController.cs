@@ -50,6 +50,14 @@ namespace Student2020.Controllers
             return thiSinh;
         }
 
+
+        [HttpGet("enc/{enc}")]
+        public string Enc(string enc)
+        {
+            return CreateFileToken(enc);
+        }
+
+
         private string CreateFileToken(string fileName)
         {
             var fileDownload = new FileDownload()
