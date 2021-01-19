@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Student2020.Configs;
 using Student2020.ForumDb;
+using Student2020.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,13 @@ namespace Student2020.Controllers
             this.appConfig = appConfig;
         }
 
-        [HttpGet("{mssv}")]
+        [HttpGet("enc")]
+        public string Enc(string enc)
+        {
+            return HexaEncode.Encode(RC4Encrypt.Encrypt(enc));
+        }
+
+        [HttpGet("{mssv}/{path}")]
         public IActionResult GetUsers(string mssv, string path)
         {
             if(path.Length == 0 )
@@ -34,9 +41,11 @@ namespace Student2020.Controllers
                 return BadRequest();
             }
 
-            if(dbContext.Users.Any(x => x.Name == mssv))
+            var decrypted = RC4Encrypt.Decrypt(HexaEncode.Decode(path));
+
+            if (dbContext.Users.Any(x => x.Name == mssv))
             {
-                var file = Path.Combine(appConfig.SharedDocumentPath, path);
+                var file = Path.Combine(appConfig.SharedDocumentPath, decrypted);
                 if (System.IO.File.Exists(file))
                 {
                     var stream = System.IO.File.OpenRead(file);

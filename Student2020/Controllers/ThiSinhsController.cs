@@ -51,7 +51,7 @@ namespace Student2020.Controllers
         }
 
 
-        [HttpGet("enc/{enc}")]
+        [HttpGet("enc")]
         public string Enc(string enc)
         {
             return CreateFileToken(enc);
